@@ -109,50 +109,6 @@ describe("Given I am connected as an employee", () => {
       expect(message).toBeTruthy();
     });
   });
-  // describe("Given I am a user connected as an Employee", () => {
-  //   describe("When I am on Bills Page", () => {
-  //     test("fetches bills from mock API GET", async () => {
-  //       const mockReturned = mockStore.bills();
-  //       const getSpy = jest.spyOn(mockReturned, "list");
-
-  //       const bills = await mockReturned.list();
-
-  //       expect(getSpy).toHaveBeenCalled();
-  //       expect(screen.getByText("Mes notes de frais")).toBeTruthy();
-  //       expect(bills.length).toBe(4);
-  //     });
-
-  //     describe("When an error occurs on API", () => {
-  //       test("fetches bills from an API and fails with 404 message error", async () => {
-  //         const mockReturned = mockStore.bills();
-
-  //         mockReturned.list.mockImplementationOnce(() => {
-  //           Promise.reject(new Error("Erreur 404"));
-  //         });
-
-  //         const html = BillsUI({ error: "Erreur 404" });
-  //         document.body.innerHTML = html;
-
-  //         const errorMessage = getByText(document.body, "Erreur 404");
-  //         expect(errorMessage).toBeTruthy();
-  //       });
-
-  //       test("fetches messages from an API and fails with 500 message error", async () => {
-  //         const mockReturned = mockStore.bills();
-
-  //         mockReturned.list.mockImplementationOnce(() => {
-  //           Promise.reject(new Error("Erreur 500"));
-  //         });
-
-  //         const html = BillsUI({ error: "Erreur 500" });
-  //         document.body.innerHTML = html;
-
-  //         const errorMessage = getByText(document.body, "Erreur 500");
-  //         expect(errorMessage).toBeTruthy();
-  //       });
-  //     });
-  //   });
-  // });
 });
 
 describe("when i click on the eye icon button", () => {
