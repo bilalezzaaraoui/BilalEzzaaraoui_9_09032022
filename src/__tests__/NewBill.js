@@ -46,15 +46,13 @@ const newBillMock = [
 describe("Given I am connected as an employee", () => {
   describe("When I am on NewBill Page", () => {
     test("Then the envelope icon in the left menu should be highlighted", () => {
-      // const html = NewBillUI();
-      // document.body.innerHTML = html;
-      //to-do write assertion
       // Get the path to newBill page
       // const pathname = ROUTES_PATH["NewBill"];
       // //define window.location to pathname : #employee/bills
       // location.assign(pathname);
       // window.location.pathname = ROUTES_PATH["NewBill"];
 
+      //to-do write assertion
       // Mock - parameters for bdd Firebase & data fetching
       apiStore.bills = () => ({ bills, get: jest.fn().mockResolvedValue() });
 
@@ -77,16 +75,6 @@ describe("Given I am connected as an employee", () => {
 
   describe("When I choose an wrong file to upload", () => {
     test("Then an error message is displayed", async () => {
-      /**
-       * Control upload file format
-       * If error format, displayed message
-       * UI Construction
-       * Create DOM HTML
-       * Mock handleChangeFile function
-       * Launch File with wrong Format
-       * Check if displayed error message
-       */
-
       // Init onNavigate
       const onNavigate = (pathname) => {
         document.body.innerHTML = ROUTES({ pathname });
@@ -109,6 +97,7 @@ describe("Given I am connected as an employee", () => {
       const inputFile = getByTestId(document.body, "file");
       //Add event on change
       inputFile.addEventListener("change", handleChangeFile);
+      const windowValue = spyOn(window, "alert");
 
       //Launch file
       fireEvent.change(inputFile, {
@@ -120,20 +109,10 @@ describe("Given I am connected as an employee", () => {
           ],
         },
       });
-
       expect(handleChangeFile).toBeCalled();
-      //Wrong format
-      const btn = document.getElementById("btn-send-bill");
-      expect(inputFile.files[0].name).toBe("document.txt");
-      expect(screen.getByText("Envoyer une note de frais")).toBeTruthy();
-
-      const handleSubmit = jest.fn(() => newBill.handleSubmit);
-      btn.addEventListener("click", handleSubmit);
-      fireEvent.click(btn);
-
-      //Check that the error message is displayed
-
-      expect(window.alert).toBeTruthy();
+      expect(windowValue).toHaveBeenCalledWith(
+        "Choose a jpg, jpeg, or png format"
+      );
     });
   });
 
@@ -180,12 +159,11 @@ describe("Given I am connected as an employee", () => {
         },
       });
 
-      expect(handleChangeFile).toBeCalled();
-      //Good format
-      expect(inputFile.files[0].name).toBe("image.png");
       expect(
         getByText(document.body, "Envoyer une note de frais")
       ).toBeTruthy();
+      expect(handleChangeFile).toBeCalled();
+      expect(inputFile.files[0].name).toBe("image.png");
     });
   });
 
